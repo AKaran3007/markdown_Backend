@@ -9,10 +9,11 @@ const jwt = require("jsonwebtoken");
 app.set("view engine" , "ejs");
 app.use(express.urlencoded({ extended: false }));
 var nodemailer = require('nodemailer');
+const dotEnv = require("dotenv").config();
 
-const JWT_SECRET = "QWERTY()YTREWQASDF@QWEDCVRTY[]@@#QWERTT$QSTDD99NN33M"
+const JWT_SECRET = process.env.JWTURL
 
-const mongoUrl = "mongodb+srv://aspkaran:karananand123@cluster0.mpe9ubl.mongodb.net/test"
+const mongoUrl = process.env.MURL
 mongoose.connect(mongoUrl, {
     useNewUrlParser: true
 }).then(() => {
@@ -116,7 +117,7 @@ app.post("/forgot-password", async (req, res) => {
             service: 'gmail',
             auth: {
               user: 'speaktokarananand123@gmail.com',
-              pass: 'ssdmdamgfmphzqig'
+              pass: process.env.NODE
             },
           });
           
