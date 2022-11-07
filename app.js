@@ -10,6 +10,7 @@ app.set("view engine" , "ejs");
 app.use(express.urlencoded({ extended: false }));
 var nodemailer = require('nodemailer');
 const dotEnv = require("dotenv").config();
+var port = process.env.PORT || 5000;
 
 const JWT_SECRET = process.env.JWTURL
 
@@ -95,8 +96,11 @@ app.post("/userData", async (req, res) => {
     }
 })
 
-app.listen(5000, () => {
-    console.log("Server Started");
+// app.listen(5000, () => {
+//     console.log("Server Started");
+// });
+app.listen(port, function() {
+    console.log("App is running on port " + port);
 });
 
 
