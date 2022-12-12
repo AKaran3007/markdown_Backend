@@ -3,7 +3,13 @@ const app = express();
 const mongoose = require("mongoose");
 app.use(express.json());
 const cors = require("cors");
-app.use(cors());
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    mode: 'no-cors',
+    optionSuccessStatus:200,
+ }
+app.use(cors(corsOptions));
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 app.set("view engine" , "ejs");
@@ -99,9 +105,6 @@ app.post("/userData", async (req, res) => {
 // app.listen(5000, () => {
 //     console.log("Server Started");
 // });
-app.listen(port, function() {
-    console.log("App is running on port " + port);
-});
 
 
 
@@ -115,13 +118,13 @@ app.post("/forgot-password", async (req, res) => {
         }
         const secret = JWT_SECRET + oldUser.password;
         const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: '5m' });
-        const link = `http://localhost:5000/reset-password/${oldUser._id}/${token}`;
+        const link = `https://voluble-sopapillas-11c6dd.netlify.app/reset-password/${oldUser._id}/${token}`;
 
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
               user: 'speaktokarananand123@gmail.com',
-              pass: process.env.NODE
+              pass: 'ssdmdamgfmphzqig'
             },
           });
           
@@ -198,5 +201,10 @@ app.post("/reset-password/:id/:token" , async (req , res) => {
     }
 
 })
+
+app.listen(port, function() {
+    console.log("App is running on port " + port);
+});
+
 
 
