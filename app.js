@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+mongoose.set('strictQuery', true);
 app.use(express.json());
 const cors = require("cors");
 const corsOptions ={
