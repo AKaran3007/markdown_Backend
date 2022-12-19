@@ -129,7 +129,7 @@ app.post("/forgot-password", async (req, res) => {
           
           var mailOptions = {
             from: 'youremail@gmail.com',
-            to: 'akaran3007@gmail.com',
+            to: `{mail.email}`,
             subject: 'Sending Email using Node.js',
             text: link,
           };
